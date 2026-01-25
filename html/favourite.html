@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .add-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .add-form input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+            outline: none;
+        }
+        .add-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .add-form button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        li button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        li button:hover {
+            background-color: #c82333;
+        }
+        .back-btn {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .back-btn:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button onclick="goBack()" class="back-btn">Back to Menu</button>
+        <h1>My Favorites</h1>
+        <div class="add-form">
+            <input type="text" id="newFav" placeholder="Add a favorite place...">
+            <button onclick="addFavorite()">Add</button>
+        </div>
+        <ul id="favoritesList"></ul>
+    </div>
+
+    <script>
+        function addFavorite() {
+            const input = document.getElementById('newFav');
+            const value = input.value.trim();
+            if (value) {
+                const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+                favorites.push(value);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                input.value = '';
+                displayFavorites();
+            }
+        }
+
+        function removeFavorite(index) {
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            favorites.splice(index, 1);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            displayFavorites();
+        }
+
+        function displayFavorites() {
+            const list = document.getElementById('favoritesList');
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            list.innerHTML = '';
+            favorites.forEach((fav, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span>${fav}</span><button onclick="removeFavorite(${index})">Remove</button>`;
+                list.appendChild(li);
+            });
+        }
+
+        function goBack() {
+            window.location.href = 'menu.html';
+        }
+
+        window.onload = displayFavorites;
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="_-p1pGtIrxEI2lx_xTJME";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+
+    </script>
+</body>
+</html>
