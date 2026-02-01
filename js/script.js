@@ -1,61 +1,74 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Handle login form
-    const loginForm = document.getElementById('login-form');
-    if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
+document.addEventListener('DOMContentLoaded', () => {
 
-            if (email && password) {
-                alert('Login successful! (This is just a demo)');
-             window.location.href = 'menu.html';
-            } else {
-                alert('Please fill in all fields');
-            }
-        });
-    }
+  const users = JSON.parse(localStorage.getItem('users')) || [];
 
-    // Handle register form
-    const registerForm = document.getElementById('register-form');
-    if (registerForm) {
-        registerForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('register-name').value;
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-            const confirmPassword = document.getElementById('register-confirm-password').value;
+  // LOGIN
+  const loginForm = document.getElementById('login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
 
-            if (name && email && password && confirmPassword) {
-                if (password === confirmPassword) {
-                    alert('Registration successful! (This is just a demo)');
-                    // Here you would typically send the data to your server
-                    // After successful registration, redirect to login
-                    window.location.href = 'login.html';
-                } else {
-                    alert('Passwords do not match');
-                }
-            } else {
-                alert('Please fill in all fields');
-            }
-        });
-    }
+      const email = loginForm.querySelector('#login-email').value;
+      const password = loginForm.querySelector('#login-password').value;
 
-    // Handle reset password form
-    const resetForm = document.getElementById('reset-form');
-    if (resetForm) {
-        resetForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('reset-email').value;
+      const user = users.find(u => u.email === email && u.password === password);
 
-            if (email) {
-                alert('Password reset link sent! Check your email. (This is just a demo)');
-                // Here you would typically send the reset request to your server
-                // After sending reset link, redirect to login
-                window.location.href = 'login.html';
-            } else {
-                alert('Please enter your email address');
-            }
-        });
-    }
+      if (user) {
+        alert('Login successful');
+        window.location.href = 'menu.html';
+      } else {
+        alert('Account does not exist or wrong password');
+      }
+    });
+  }
+
+  // REGISTER
+  const registerForm = document.getElementById('register-form');
+  if (registerForm) {
+    registerForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const name = registerForm.querySelector('#register-name').value;
+      const email = registerForm.querySelector('#register-email').value;
+      const password = registerForm.querySelector('#register-password').value;
+      const confirm = registerForm.querySelector('#register-confirm-password').value;
+
+      if (!name || !email || !password || !confirm) {
+        return alert('Fill all fields');
+      }
+
+      if (password !== confirm) {
+        return alert('Passwords do not match');
+      }
+
+      if (users.find(u => u.email === email)) {
+        return alert('Account already exists');
+      }
+
+      users.push({ name, email, password });
+      localStorage.setItem('users', JSON.stringify(users));
+
+      alert('Registration successful');
+      window.location.href = 'login.html';
+    });
+  }
+
+  // RESET PASSWORD (DEMO)
+  const resetForm = document.getElementById('reset-form');
+  if (resetForm) {
+    resetForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const email = resetForm.querySelector('#reset-email').value;
+      const user = users.find(u => u.email === email);
+
+      if (user) {
+        alert('Reset link sent (demo)');
+        window.location.href = 'login.html';
+      } else {
+        alert('Account does not exist');
+      }
+    });
+  }
+
 });

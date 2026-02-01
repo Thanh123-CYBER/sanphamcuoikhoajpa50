@@ -24,6 +24,18 @@
       background: #ffffff;
       border-radius: 20px;
       border: 1px solid #e5edff;
+      position: relative;
+    }
+
+    .back {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      color: #2563eb;
+      font-size: 14px;
+      cursor: pointer;
     }
 
     h2 {
@@ -56,7 +68,7 @@
       resize: none;
     }
 
-    button {
+    button.submit {
       margin-top: 12px;
       padding: 18px;
       border: none;
@@ -67,7 +79,7 @@
       cursor: pointer;
     }
 
-    button:hover {
+    button.submit:hover {
       opacity: 0.95;
     }
   </style>
@@ -75,13 +87,15 @@
 
 <body>
   <div class="card">
+    <button class="back" onclick="window.location.href='login.html'">← Back</button>
+
     <h2>Contact Us</h2>
 
     <form>
       <input type="text" placeholder="Your name" required />
       <input type="email" placeholder="Your email" required />
-      <textarea placeholder="Your message" required></textarea>
-      <button type="submit">Send message</button>
+      <textarea placeholder="Your message..." required></textarea>
+      <button class="submit" type="submit">Send message</button>
     </form>
   </div>
 </body>

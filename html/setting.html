@@ -99,99 +99,32 @@
       text-align: center;
       color: #64748b;
     }
+         .back-btn {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .back-btn:hover {
+            background-color: #5a6268;
+        }
   </style>
 </head>
 
 <body>
   <div class="menu-container">
     <h1>Travel & Tourism</h1>
+        <button onclick="goBack()" class="back-btn">Back to Menu</button>
 
    
 
     
 
-    <div class="menu-grid">
-      <button class="menu-item" onclick="locateMe()">Find My Location</button>
-        <a class="menu-item" href="search.html">Search places</a>
-      <a class="menu-item" href="plans.html">Plan Trip</a>
-      <a class="menu-item" href="favourite.html">My Favorites</a>
-                  <a class="menu-item" href="setting.html">Settings</a>
-
-      <a class="menu-item" href="login.html">Logout</a>
-
-    </div>
-
-    <div id="location"></div>
-  </div>
-
-  <script>
-    async function searchAPI() {
-      const q = document.getElementById('query').value.trim();
-      const results = document.getElementById('results');
-
-      if (!q) {
-        results.innerHTML = '';
-        return;
-      }
-
-      results.textContent = 'Searching…';
-
-      const url =
-        'https://nominatim.openstreetmap.org/search' +
-        '?format=json' +
-        '&limit=5' +
-        '&q=' + encodeURIComponent(q);
-
-      try {
-        const res = await fetch(url, {
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-        const data = await res.json();
-
-        if (data.length === 0) {
-          results.textContent = 'No results found';
-          return;
-        }
-
-        results.innerHTML = data
-          .map(place => `
-            <div class="result">
-              ${place.display_name}
-            </div>
-          `)
-          .join('');
-      } catch {
-        results.textContent = 'API error';
-      }
-    }
-
-    function locateMe() {
-      const box = document.getElementById('location');
-
-      navigator.geolocation.getCurrentPosition(async pos => {
-        const url =
-          `https://nominatim.openstreetmap.org/reverse?format=json` +
-          `&lat=${pos.coords.latitude}` +
-          `&lon=${pos.coords.longitude}`;
-
-        const res = await fetch(url);
-        const data = await res.json();
-
-        const city =
-          data.address.city ||
-          data.address.town ||
-          data.address.state ||
-          '';
-
-        const country = data.address.country || '';
-
-        box.textContent = `${country} ${city}`;
-      }, () => {
-        box.textContent = 'Location denied';
-      });
-    }
+    <script>
     (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="_-p1pGtIrxEI2lx_xTJME";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
   </script>
 </body>
