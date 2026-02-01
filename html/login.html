@@ -3,183 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Menu</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            color: #333;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .menu-container {
-            background-color: white;
-            padding: 40px;
-            width: 100%;
-            height: 100vh;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            position: relative;
-        }
-        .search-bar {
-            margin-bottom: 40px;
-            width: 100%;
-            max-width: 400px;
-            position: relative;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .search-bar input {
-            width: 100%;
-            padding: 10px 40px 10px 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-            outline: none;
-        }
-        .search-bar button {
-            position: absolute;
-            right: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 8px 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .search-bar button:hover {
-            background-color: #0056b3;
-        }
-        h1 {
-            margin-bottom: 20px;
-            color: #333;
-            font-size: 36px;
-            font-weight: bold;
-            text-align: center;
-            width: 100%;
-        }
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            width: 100%;
-            max-width: 300px;
-        }
-        .menu-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .menu-item:hover {
-            background-color: #0056b3;
-        }
-        .logout {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            padding: 8px 12px;
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        .logout:hover {
-            background-color: #c82333;
-        }
-    </style>
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <div class="menu-container">
-        <h1>Welcome to Travel & Tourism</h1>
-        <div class="search-bar">
-            <input type="text" placeholder="Search places...">
-            <button onclick="searchPlaces()">Search</button>
+    <div class="container">
+        <div class="form-container">
+            <form id="login-form">
+                <h2>Login</h2>
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <p class="link">Forgot password? <a href="resetpass.html">Reset here</a></p>
+                <p class="link">Don't have an account? <a href="register.html">Register here</a></p>
+                <p class="link">Having trouble logging in? <a href="contact.html">Contact us</a></p>
+                
+            </form>
         </div>
-        <div class="menu-grid">
-            <button onclick="locateMe()" class="menu-item">Find My Location</button>
-            <a href="plans.html" class="menu-item">Plan Trip</a>
-            <a href="favourite.html" class="menu-item">My Favorites</a>
-        </div>
-        <div id="locationDisplay" style="margin-top: 20px; font-size: 14px; color: #666;"></div>
-        <div id="searchResults" style="margin-top: 20px; font-size: 14px; color: #666;"></div>
-        <button class="logout" onclick="logout()">Logout</button>
     </div>
-
-    <script>
-        function logout() {
-            window.location.href = 'login.html';
-        }
-
-        function searchPlaces() {
-            const query = document.querySelector('.search-bar input').value.trim();
-            if (query) {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition((position) => {
-                        const lat = position.coords.latitude;
-                        const lng = position.coords.longitude;
-                        document.getElementById('searchResults').textContent = `Searching for "${query}" near your location: Latitude ${lat}, Longitude ${lng}`;
-                    }, (error) => {
-                        document.getElementById('searchResults').textContent = `Searching for "${query}" (location access denied)`;
-                    });
-                } else {
-                    document.getElementById('searchResults').textContent = `Searching for "${query}"`;
-                }
-            } else {
-                document.getElementById('searchResults').textContent = 'Please enter a search term.';
-            }
-        }
-
-        function locateMe() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, showError);
-            } else {
-                document.getElementById('locationDisplay').textContent = 'Geolocation is not supported by this browser.';
-            }
-        }
-
-        function showPosition(position) {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-            document.getElementById('locationDisplay').textContent = `Your location: Latitude ${lat}, Longitude ${lng}`;
-        }
-
-        function showError(error) {
-            let message = '';
-            switch(error.code) {
-                case error.PERMISSION_DENIED:
-                    message = 'User denied the request for Geolocation.';
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    message = 'Location information is unavailable.';
-                    break;
-                case error.TIMEOUT:
-                    message = 'The request to get user location timed out.';
-                    break;
-                case error.UNKNOWN_ERROR:
-                    message = 'An unknown error occurred.';
-                    break;
-            }
-            document.getElementById('locationDisplay').textContent = message;
-        }
-
-        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="_-p1pGtIrxEI2lx_xTJME";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-    </script>
+    <script src="../js/script.js"></script>
 </body>
 </html>

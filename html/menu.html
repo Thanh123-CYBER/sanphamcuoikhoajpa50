@@ -116,6 +116,7 @@
             <button onclick="locateMe()" class="menu-item">Find My Location</button>
             <a href="plans.html" class="menu-item">Plan Trip</a>
             <a href="favourite.html" class="menu-item">My Favorites</a>
+            <a href="login.html" class="menu-item">Logout</a>
         </div>
         <div id="locationDisplay" style="margin-top: 20px; font-size: 14px; color: #666;"></div>
         <button class="logout" onclick="logout()">Logout</button>
@@ -126,25 +127,7 @@
             window.location.href = 'login.html';
         }
 
-        function searchPlaces() {
-            const query = document.querySelector('.search-bar input').value.trim();
-            if (query) {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition((position) => {
-                        const lat = position.coords.latitude;
-                        const lng = position.coords.longitude;
-                        window.open('' + encodeURIComponent(query) + '/@' + lat + ',' + lng, '_blank');
-                    }, (error) => {
-                        alert('Location access denied or unavailable. Searching without location.');
-                        window.open('https://www.google.com/maps/search/' + encodeURIComponent(query), '_blank');
-                    });
-                } else {
-                    window.open('https://www.google.com/maps/search/' + encodeURIComponent(query), '_blank');
-                }
-            } else {
-                alert('Please enter a search term.');
-            }
-        }
+    
 
         function locateMe() {
             if (navigator.geolocation) {
