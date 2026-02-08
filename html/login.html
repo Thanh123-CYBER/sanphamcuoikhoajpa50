@@ -1,32 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        * { box-sizing: border-box; font-family: Arial, system-ui; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #f5f9ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #1f2937;
+        }
+
+        .menu-container {
+            width: 100%;
+            max-width: 520px;
+            padding: 48px;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e5edff;
+            position: relative;
+        }
+
+        h1 {
+            margin-bottom: 32px;
+            text-align: center;
+            color: #1e40af;
+            font-size: 32px;
+        }
+
+        .form-wrapper {
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        form { display: grid; gap: 14px; }
+
+        label { font-size: 14px; color: #475569; }
+
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid #dbe7ff;
+            font-size: 15px;
+            background: #ffffff;
+        }
+
+        input:focus { outline: none; border-color: #2563eb; }
+
+        .menu-item {
+            padding: 12px;
+            border-radius: 14px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .links { display:flex; justify-content:space-between; margin-top:8px; font-size:14px }
+        .links a { color:#2563eb; text-decoration:none }
+    </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="form-container">
+    <div class="menu-container">
+        <h1>Travel & Tourism</h1>
+
+        <div class="form-wrapper">
             <form id="login-form">
-                <h2>Login</h2>
-                <div class="form-group">
+                <div>
                     <label for="login-email">Email</label>
-                    <input type="email" id="login-email" required>
+                    <input type="email" id="login-email" placeholder="ABC@domain.com    " required />
                 </div>
-                <div class="form-group">
+
+                <div>
                     <label for="login-password">Password</label>
-                    <input type="password" id="login-password" required>
+                    <input type="password" id="login-password" placeholder="••••••••" required />
                 </div>
-                <button type="submit" class="btn">Login</button>
-                <p class="link">Forgot password? <a href="resetpass.html">Reset here</a></p>
-                <p class="link">Don't have an account? <a href="register.html">Register here</a></p>
-                <p class="link">Having trouble logging in? <a href="contact.html">Contact us</a></p>
-                
+
+                <button type="submit" class="menu-item">Login</button>
+
+                <div class="links">
+                    <a href="resetpass.html">Forgot password?</a>
+                    <a href="register.html">Create account</a>
+                </div>
             </form>
         </div>
     </div>
+
     <script src="../js/script.js"></script>
 </body>
 </html>

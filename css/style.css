@@ -86,3 +86,57 @@ body {
 .link a:hover {
     text-decoration: underline;
 }
+
+/* Shared card and form styles for auth pages */
+.card {
+    width: 440px;
+    padding: 36px;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e5edff;
+    box-shadow: 0 8px 30px rgba(15,23,42,0.04);
+    margin: 40px auto;
+}
+
+.card h2 {
+    margin: 0 0 18px;
+    text-align: center;
+    color: #1e40af;
+}
+
+.back {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: none;
+    border: none;
+    color: #2563eb;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.form-grid {
+    display: grid;
+    gap: 14px;
+}
+
+.form-input {
+    padding: 12px 14px;
+    border: 1px solid #dbe7ff;
+    border-radius: 10px;
+    font-size: 15px;
+    background: #fff;
+}
+
+.submit {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: none;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.help-links { display:flex;justify-content:space-between;font-size:13px;color:#64748b }
+

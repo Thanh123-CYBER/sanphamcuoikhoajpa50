@@ -7,19 +7,16 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="form-container">
-            <form id="reset-form">
-                <h2>Reset Password</h2>
-                <div class="form-group">
-                    <label for="reset-email">Email</label>
-                    <input type="email" id="reset-email" required>
-                </div>
-                <button type="submit" class="btn">Send Reset Link</button>
-                <p class="link">Remember your password? <a href="login.html">Login here</a></p>
-            </form>
-        </div>
-    </div>
-    <script src="../js/script.js"></script>
+  <div class="card">
+    <h2>Reset Password</h2>
+
+    <form id="reset-form" class="form-grid">
+      <input class="form-input" type="email" id="reset-email" placeholder="Your email" required />
+      <button type="submit" class="submit">Send Reset Link</button>
+      <div style="text-align:center;margin-top:8px;color:#64748b">Remember your password? <a href="login.html" style="color:#2563eb">Login here</a></div>
+    </form>
+  </div>
+
+  <script src="../js/script.js"></script>
 </body>
 </html>

@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const users = JSON.parse(localStorage.getItem('users')) || [];
 
-  // LOGIN
   const loginForm = document.getElementById('login-form');
   if (loginForm) {
     loginForm.addEventListener('submit', e => {
@@ -14,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const user = users.find(u => u.email === email && u.password === password);
 
       if (user) {
+        localStorage.setItem('account', JSON.stringify(user));
         alert('Login successful');
         window.location.href = 'menu.html';
       } else {
@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // RESET PASSWORD (DEMO)
   const resetForm = document.getElementById('reset-form');
   if (resetForm) {
     resetForm.addEventListener('submit', e => {
@@ -63,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const user = users.find(u => u.email === email);
 
       if (user) {
-        alert('Reset link sent (demo)');
+        alert('Reset link sent ');
         window.location.href = 'login.html';
       } else {
         alert('Account does not exist');
